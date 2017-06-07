@@ -22,7 +22,7 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
-      <%= fields_for( :payment ) do |p| %>
+      <%= fields_for(:payment) do |p| %>
       	<div class="row col-md-12">
       		<div class="form-group col-md-4 no-left-padding">
       			<%= p.label :card_number, "Card Number", data: { stripe: 'label'} %>
@@ -40,7 +40,8 @@
       				<%= p.select :card_expires_month, options_for_select(Payment.month_options),
       					{ include_blank: 'Month' },
       					data: { stripe: 'exp-month' },
-      					class: "form-control", required: true %>
+      					class: "form-control", 
+      					required: true %>
       			</div>
       			<div class="col-md-3">
       				<%= p.select :card_expires_year, options_for_select(Payment.year_options),

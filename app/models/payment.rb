@@ -1,6 +1,8 @@
 class Payment < ActiveRecord::Base
   
   attr_accessor :card_number, :card_cvv, :card_expires_month, :card_expires_year
+  # attributes (params) from form will not be persisted to the db, there for we are using
+  # only the getter and setters 
   belongs_to :user
   
   def self.month_options

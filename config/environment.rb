@@ -4,6 +4,7 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 Rails.application.initialize!
 
+# Configuring ActionMailer to Use SendGrid (https://sendgrid.com/docs/Integrate/Frameworks/rubyonrails.html)
 ActionMailer::Base.smtp_settings = {
   :address => 'smtp.sendgrid.net',
   :port => '587',

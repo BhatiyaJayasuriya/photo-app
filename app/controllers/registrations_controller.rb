@@ -4,17 +4,19 @@ class RegistrationsController < Devise::RegistrationsController
     # similar to devise reg controller but with some changes as we need to create payment with user registration
 		build_resource(sign_up_params)
 
-    resource.class.transaction do
+    resource.class.transaction do # with transaction, if any exceptions raised, db will be rolled back to previous state
       resource.save
       yield resource if block_given?
+      # means that we can pass some code in as a block 
+      # (which is just an anonymous function) that will receive the resource as a parameter.
       if resource.persisted?
   	    @payment = Payment.new({ email: params["user"]["email"],
   					          token: params[:payment]["token"], user_id: resource.id })
-  
+        
   			flash[:error] = "Please check registration errors" unless @payment.valid?
   			
   			begin
-  				@payment.process_payment
+  				@payment.process_payment # this is a instance method we created in Payment
   				@payment.save
   			rescue Exception => e
   				flash[:error] = e.message
@@ -40,4 +42,10 @@ class RegistrationsController < Devise::RegistrationsController
       end			
 		end
 	end
+	
+  protected # registrationsController class is a sub class or DEvise::RegistrationsController there for can access its methods
+  
+  def configure_permitted_parameters # this is a Devise related method, since we are adding payment we need to sanitize it
+    devise_parameter_sanitizer.for(:sign_up).push(:payment)
+  end
 end
