@@ -2,6 +2,8 @@
 /*global Stripe*/
 
 $(document).ready(function() {
+  // there are some conflict with turbolink check out this udemy thread:
+  // https://www.udemy.com/the-complete-ruby-on-rails-developer-course/learn/v4/questions/980582
   var show_error, stripeResponseHandler, submitHandler;
 
   submitHandler = function(event) {
@@ -23,7 +25,9 @@ $(document).ready(function() {
   };
 
   $(".cc_form").on("submit", submitHandler);
-
+  // we had to remove turbolink form gem file because there was a conflict. A user suggest modifing 
+  // this code like this to work it better:
+  // $(document).on('submit', ".cc_form", submitHandler);
   stripeResponseHandler = function(status, response) {
     var token, $form;
 

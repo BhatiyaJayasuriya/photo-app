@@ -13,4 +13,5 @@ class User < ActiveRecord::Base
   # two new methods are added to your model:
   # user_attributes=(attributes) and payment_attributes=(attributes)
   # Enabling nested attributes on a one-to-one association allows you to create the member and avatar in one go:
+  has_many :images
 end
