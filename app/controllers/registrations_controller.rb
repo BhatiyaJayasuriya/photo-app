@@ -43,7 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
 		end
 	end
 	
-  protected # registrationsController class is a sub class or DEvise::RegistrationsController there for can access its methods
+  protected # registrationsController class is a sub class or Devise::RegistrationsController therefor can access its methods
   
   def configure_permitted_parameters # this is a Devise related method, since we are adding payment we need to sanitize it
     devise_parameter_sanitizer.for(:sign_up).push(:payment)

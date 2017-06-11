@@ -8,6 +8,7 @@
   <dd><%= @image.name %></dd>
   <dt></dt>
   <dd><%= image_tag(@image.picture.url, size: '250x250') if @image.picture? %></dd>
+  <!--also works <dd><%#= image_tag(@image.picture_url, size: '250x250') if @image.picture? %></dd> -->
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
